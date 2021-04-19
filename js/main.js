@@ -16,8 +16,11 @@ for(let words of test){
     //console.log(person['name'], person['surname'] );
 
 const form = document.forms.studentsForm;
-const res = document.querySelector('.res');
+const formGood = document.forms.goodStudents
+const res = document.querySelector('.container');
 const btnSubmit = document.querySelector('.btn-submit')
+const btnSubmitGood = document.querySelector('.btn-submit__goodStudents')
+const container = document.querySelector('.container-good');
 
 let proCodeClassroom = [
     {name:'Иванна', surname:'Зимина', homework: 7},
@@ -27,9 +30,52 @@ let proCodeClassroom = [
     {name: 'Натилия', surname: 'Горошко', homework: 8}
 ];
 
-for(let studenst of proCodeClassroom){
+form.addEventListener('submit', (ev) => {
+
+    ev.preventDefault();
+    for(const fullname of proCodeClassroom) {
+        const html = `
+            
+            <div>
+                <div>Student: ${fullname['name']} ${fullname['surname']}, ${fullname['homework']}</div>
+                
+            </div>
+        `;
+        res.insertAdjacentHTML('beforeend', html);
+    };
+});
+
+
+
+formGood.addEventListener('submit', (ev) => {
+
+    ev.preventDefault();
+    //for(const goodStudenst of proCodeClassroom) {
+
+    const filterClass = proCodeClassroom.filter((person) => {
+        return person.homework > 8;
+    });
+    console.log(filterClass)
+    for(const pers of proCodeClassroom) {
+        const html = `
+            
+            <div>
+                <div>Student: ${pers['name']} ${pers['surname']}, ${pers['homework']}</div>
+                
+            </div>
+        `;
+        container.insertAdjacentHTML('afterend', html);
+    };
+});
+//<input type="hidden" name="fullname" value="${fullname}">
+//<button type="submit">ok</button>
+
+
+
+//console.log (proCodeClassroom)
+/*for(let studenst of proCodeClassroom){
     console.log(studenst);
-}
+}*/
 
 /*const filterClass = proCodeClassroom.filter((person) =>{
     return person.homework > a
